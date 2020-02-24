@@ -18,6 +18,18 @@ class MemoListTableViewController: UITableViewController {
         return f
     }()
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //세그웨이가 연결된 화면을 생성하고, 생성된 화면을 전환하기전 자동으로 호출됨
+        //sender : 세그웨이를 선택한 셀 -> sender를 활용해 몇번째 셀이 연결됐는지 계산함
+        if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell){
+            let target = Memo.dummyMemoList[indexPath.row]
+            
+            if let vc = segue.destination as? DetailViewController {
+                vc.memo = target
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
