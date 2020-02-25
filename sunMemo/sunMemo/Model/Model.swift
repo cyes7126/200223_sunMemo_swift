@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Memo {
+/*class Memo {
     var content : String
     var insertDate : Date
     
@@ -23,3 +23,4 @@ class Memo {
         Memo(content: "Dolar Amet")
     ]
 }
+*/

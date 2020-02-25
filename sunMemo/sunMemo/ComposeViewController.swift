@@ -10,6 +10,8 @@ import UIKit
 
 class ComposeViewController: UIViewController {
     
+    var editTarget: Memo?
+    
     @IBOutlet var memoTextView: UITextView!
     
     @IBAction func close(_ sender: Any) {
@@ -18,8 +20,12 @@ class ComposeViewController: UIViewController {
     
     @IBAction func save(_ sender: Any) {
         let memo = memoTextView.text
-        let newMemo = Memo(content: memo ?? "")
-        Memo.dummyMemoList.append(newMemo)
+        if let editTarget = editTarget{
+            editTarget.content = memo //편집모드일땐 새로운 메모로 변경
+            DataManager.shared.saveContext()
+        }else{
+            DataManager.shared.addNewMemo(memo)
+        }
         dismiss(animated: true, completion: nil)
     }
     
@@ -28,6 +34,13 @@ class ComposeViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        if let memo = editTarget{
+            navigationItem.title = "메모 편집"
+            memoTextView.text = memo.content
+        }else{
+            navigationItem.title = "새 메모"
+            memoTextView.text = ""
+        }
     }
     
 

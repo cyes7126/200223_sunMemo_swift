@@ -9,6 +9,9 @@
 import UIKit
 
 class DetailViewController: UIViewController {
+    
+    @IBOutlet var memoTableView: UITableView!
+    
     let formatter : DateFormatter = {
         let f = DateFormatter()
         f.dateStyle = .long //long:20년2월23일, medium:2020.02.23
@@ -19,10 +22,36 @@ class DetailViewController: UIViewController {
     
     var memo: Memo?//최초로 선언될땐 값이 없으므로 옵셔널로 선언
     
+    @IBAction func deleteMemo(_ sender: Any) {
+        let alert = UIAlertController(title: "삭제 확인", message: "메모를 삭제하시겠습니까?", preferredStyle: .alert)
+        //삭제버튼 추가
+        let deleteAction = UIAlertAction(title: "삭제", style: .destructive){ (action) in
+            DataManager.shared.deleteMemo(self.memo)
+            self.navigationController?.popViewController(animated: true)//네비게이션 화면에 접근한후 현재화면을 팝해야함.
+        }
+        alert.addAction(deleteAction)
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination.children.first as?
+            ComposeViewController{
+            vc.editTarget = memo //메모전달
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        memoTableView.reloadData()
     }
     
 

@@ -72,7 +72,18 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1xP-LN-woU">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem title="Item" id="prx-zz-u1v"/>
+                                    <barButtonItem systemItem="trash" id="rzk-n9-0Tn">
+                                        <color key="tintColor" red="1" green="0.32071404040000001" blue="0.16657822629999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <connections>
+                                            <action selector="deleteMemo:" destination="02M-cw-gtn" id="YDP-ZG-yt1"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="QzU-fq-deP"/>
+                                    <barButtonItem systemItem="compose" id="prx-zz-u1v">
+                                        <connections>
+                                            <segue destination="xmW-zp-c7u" kind="presentation" id="3fW-nP-0U0"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tGk-v2-nwd">
@@ -132,6 +143,9 @@
                         <viewLayoutGuide key="safeArea" id="vWQ-ZV-cYi"/>
                     </view>
                     <navigationItem key="navigationItem" title="메모 보기" id="K1P-cu-Xas"/>
+                    <connections>
+                        <outlet property="memoTableView" destination="tGk-v2-nwd" id="wIz-5W-zNa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vnz-mX-f7A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -218,4 +232,7 @@
             <point key="canvasLocation" x="1246" y="-307"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="T1z-Mf-vTX"/>
+    </inferredMetricsTieBreakers>
 </document>
