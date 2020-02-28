@@ -22,6 +22,17 @@ class DetailViewController: UIViewController {
     
     var memo: Memo?//최초로 선언될땐 값이 없으므로 옵셔널로 선언
     
+    @IBAction func share(_ sender: Any) {
+        guard let memo = memo?.content else
+        { return }
+        
+        //ui view controller 의 activity instance
+        let vc = UIActivityViewController(activityItems: [memo], applicationActivities: nil)
+        
+        //화면표시
+        present(vc, animated: true, completion: nil)
+    }
+    
     @IBAction func deleteMemo(_ sender: Any) {
         let alert = UIAlertController(title: "삭제 확인", message: "메모를 삭제하시겠습니까?", preferredStyle: .alert)
         //삭제버튼 추가
